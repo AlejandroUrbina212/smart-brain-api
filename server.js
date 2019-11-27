@@ -38,6 +38,33 @@ app.post('/signin', (req, res) => {
         res.status(400).json('error login in');
     }
 })
+app.get('/profile/:id',(req, res)=>{
+    let found = false;
+    const { id } = req.params;
+    database.users.forEach(user => {
+        if (user.id == id){
+            found = true;
+            res.json(user);
+        }
+    })
+    if (!found){
+        res.status(400).json('not found');
+    }
+})
+app.post('/image', (req, res)=>{
+    let found = false;
+    const { id } = req.body;
+    database.users.forEach(user => {
+        if (user.id == id){
+            found = true;
+            user.entries++
+            res.json(user.entries);
+        }
+    })
+    if (!found){
+        res.status(400).json('not found');
+    }
+})
 app.post('/register', (req, res) => {
     // destructuring
     const {email, password, name} = req.body;
@@ -56,11 +83,3 @@ app.post('/register', (req, res) => {
 app.listen(3000,()=>{
     console.log('app is running on port 3000  ');
 })
-
-/**
- * / --> res = this is working
- * /signin --> POST = success/fail
- * /register --> POST = user
- * /profile/:userId --> GET user
- * /image --> PUT --> user
- */
