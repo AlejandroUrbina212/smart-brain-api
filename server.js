@@ -42,7 +42,7 @@ app.get('/', (req,res)=>{
 app.post('/signin', (req, res) => {
    if (req.body.email === database.users[0].email && 
     req.body.password === database.users[0].password){
-        res.json('success');
+        res.json(database.users[0]);
     } else {
         res.status(400).json('error login in');
     }
@@ -60,7 +60,7 @@ app.get('/profile/:id',(req, res)=>{
         res.status(400).json('not found');
     }
 })
-app.post('/image', (req, res)=>{
+app.put('/image', (req, res)=>{
     let found = false;
     const { id } = req.body;
     database.users.forEach(user => {
@@ -77,16 +77,15 @@ app.post('/image', (req, res)=>{
 app.post('/register', (req, res) => {
     // destructuring
     const {email, password, name} = req.body;
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(password, salt, function(err, hash) {
-            console.log(hash);
-        });
-    });
+    // bcrypt.genSalt(10, function(err, salt) {
+    //     bcrypt.hash(password, salt, function(err, hash) {
+    //         console.log(hash);
+    //     });
+    // });
     database.users.push({
         id: '125',
-        name: name,
         email: email,
-        password: password,
+        name: name,
         entries: 0,
         joined: new Date()
     });
