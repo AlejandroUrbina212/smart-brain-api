@@ -19,7 +19,6 @@ const db = knex({
       ssl : true,
     }
   });
- console.log(DATABASE_URL);
 // bodyParser allows us to format the responses and requests
 app.use(bodyParser.json());
 // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
