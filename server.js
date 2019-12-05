@@ -14,10 +14,7 @@ const image = require('./controllers/image');
 /* knex conection to the postgresql database allocated in heroku*/
 const db = knex({
     client: 'pg',
-    connection: {
-      connectionString : process.env.DATABASE_URL,
-      ssl : true,
-    }
+    connection: process.env.DATABASE_URL,
   });
 // bodyParser allows us to format the responses and requests
 app.use(bodyParser.json());
